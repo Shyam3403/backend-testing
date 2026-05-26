@@ -3,7 +3,7 @@ name: Backend API Tests
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   test:
