@@ -14,6 +14,10 @@ fake_user = {
     "password": "1234"
 }
 
+users = {
+    1: {"name": "Shyam"}
+}
+
 
 @app.get("/")
 async def root():
@@ -70,3 +74,23 @@ async def profile(
             status_code=401,
             detail="Invalid token"
         )
+
+
+@app.get("/users/{user_id}")
+async def get_user(user_id: int):
+
+    if user_id in users:
+        return users[user_id]
+
+    raise HTTPException(
+        status_code=404,
+        detail="User not found"
+    )
+
+
+@app.post("/users")
+async def create_user(user: dict):
+
+    return {
+        "name": user["name"]
+    }
